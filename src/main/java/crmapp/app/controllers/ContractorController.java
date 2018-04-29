@@ -21,8 +21,14 @@ import crmapp.app.repositories.ContractorRepository;
 @RequestMapping(value = "/contractor")
 public class ContractorController extends BaseController {
 	
+	
+	
 	@Autowired
 	private ContractorRepository contractorRepository;
+	
+	
+	
+	
 	
 	@RequestMapping(value = GET_VALUE, method = RequestMethod.GET, headers = HEADER_JSON) 
 	public ResponseEntity<List<Contractor>> getAllSpd() {
