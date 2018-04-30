@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "app.datasource",
+      "type": "javax.sql.DataSource",
+      "sourceType": "crmapp.app.ApplicationConfiguration",
+      "sourceMethod": "public javax.sql.DataSource dataSource() "
+    },
+    {
+      "name": "app.hibernate",
+      "type": "javax.persistence.EntityManagerFactory",
+      "sourceType": "crmapp.app.ApplicationConfiguration",
+      "sourceMethod": "public javax.persistence.EntityManagerFactory entityManagerFactory(javax.sql.DataSource) "
+    }
+  ],
+  "properties": [{
+    "name": "app.hibernate.properties",
+    "type": "java.util.Map<java.lang.String,java.lang.Object>",
+    "sourceType": "javax.persistence.EntityManagerFactory"
+  }],
+  "hints": []
+}

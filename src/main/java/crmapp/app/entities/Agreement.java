@@ -53,11 +53,11 @@ public class Agreement extends UrlBaseEntity {
 		this.dateStart = dateStart;
 	}
 
-	public Client getContractor() {
+	public Client getClient() {
 		return client;
 	}
 
-	public void setContractor(Client client) {
+	public void setClient(Client client) {
 		this.client = client;
 	}
 
@@ -86,7 +86,7 @@ public class Agreement extends UrlBaseEntity {
 	}
 
 	@JsonInclude
-	public Integer getContractorId() {
+	public Integer getClientId() {
 		return client.getId();
 	}
 
