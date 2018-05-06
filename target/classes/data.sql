@@ -45,6 +45,20 @@ VALUES
 	( 2 , ' Petrov ' , ' John ' , ' Fedorovych ' , ' Petrov I.F. ' , ' 3045679871 ' , ' 1984-06-15 ' , b ' 1 ' , ' 2013-06-01 ' , null , 2 , 0 ),
 	( 3 , ' Sidorov ' , ' Petr ' , ' Valerievich ' , ' Sidorov PV ' , ' 2874526548 ' , ' 1978-09-20 ' , b ' 0 ' , ' 2012-01-01 ' , null , 3 , 0 );
 
+TRUNCATE `employee_address`;
+INSERT INTO `employee_address` (`id`, `employee_id`, `presentation`, `date_start`, `optlock`)
+VALUES 
+  ( 1 , 1 , ' Ukraine, 04205, Kyiv, Obolonsky ave., 23, room 34 ' , '01 -01-2012 ' , 0 ),
+  ( 2 , 2 , ' Ukraine, 01210, Kyiv, Kreschatik Street, 12 ' , ' 2012-01-01 ' , 0 ),
+  ( 3 , 3 , ' Ukraine, 00023, Kyiv, T. Shevchenko blvd., 34/1 ' , ' 2012-01-01 ' , 0 );
+
+TRUNCATE `employee_account`;
+INSERT INTO `employee_account` (`id`, `employee_id`, `presentation`, `date_start`, `optlock`)
+VALUES
+	( 1 , 1 , ' 26007017100038 JSC "Piraeus Bank ICB" MFO 300658 ' , ' 1/1/2013 ' , 0 )
+	( 2 , 2 , ' 26007247100756 at AT & T PRIVATBANK, IFO 320699 ' , ' 2013-01-01 ' , 0 ),
+	( 3 , 3 , ' 26007547230756 at AT & T PRIVATBANK, IFO 320699 ' , ' 2013-01-01 ' , 0 );
+
 TRUNCATE `vacation`;
 INSERT INTO `vacation` (`id`, `employee_id`, `description`, `date_start`, `date_final`, `days_amount`, `holiday_amount`, `comment`, `optlock`)
 VALUES
