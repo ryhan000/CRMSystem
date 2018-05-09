@@ -24,8 +24,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "agreement")
-@JsonIgnoreProperties(ignoreUnknown = true, value = { "hibernateLazyInitializer", "handler" } )
-public class Agreement extends UrlBaseEntity implements Serializable {
+@JsonIgnoreProperties(ignoreUnknown = true, 
+	value = { "hibernateLazyInitializer", "handler" } )
+public class ClientAgreement extends UrlBaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -49,10 +50,10 @@ public class Agreement extends UrlBaseEntity implements Serializable {
 	// @OrderBy("id ASC")
 	// private Set<Document> documents;
 
-	public Agreement() {
+	public ClientAgreement() {
 	}
 
-	public Agreement(Client client, String number, Date dateStart) {
+	public ClientAgreement(Client client, String number, Date dateStart) {
 		this.client = client;
 		this.number = number;
 		this.dateStart = dateStart;

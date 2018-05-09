@@ -17,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 @Table(name = "document")
-@JsonIgnoreProperties(ignoreUnknown = true, value = { "hibernateLazyInitializer", "handler" })
+@JsonIgnoreProperties(ignoreUnknown = true,
+	value = { "hibernateLazyInitializer", "handler" })
 public class Document extends UrlBaseEntity {
 
 	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
@@ -47,7 +48,7 @@ public class Document extends UrlBaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "agreement_id")
-	private Agreement agreement;
+	private ClientAgreement agreement;
 
 	public Document() {
 	}
@@ -121,11 +122,11 @@ public class Document extends UrlBaseEntity {
 		this.dated = dated;
 	}
 
-	public Agreement getAgreement() {
+	public ClientAgreement getAgreement() {
 		return agreement;
 	}
 
-	public void setAgreement(Agreement agreement) {
+	public void setAgreement(ClientAgreement agreement) {
 		this.agreement = agreement;
 	}
 
