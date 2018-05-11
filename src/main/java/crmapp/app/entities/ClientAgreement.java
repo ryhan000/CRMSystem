@@ -16,16 +16,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name = "agreement")
+@Table(name = "client_agreement")
 @JsonIgnoreProperties(ignoreUnknown = true, 
-	value = { "hibernateLazyInitializer", "handler" } )
+	value = { "hibernateLazyInitializer", "handler" })
 public class ClientAgreement extends UrlBaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -45,10 +43,10 @@ public class ClientAgreement extends UrlBaseEntity implements Serializable {
 	@Column(name = "comment")
 	private String comment;
 
-	// @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy =
-	// "agreement")
-	// @OrderBy("id ASC")
-	// private Set<Document> documents;
+	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "agreement")
+	@OrderBy("id ASC")
+	@JsonManagedReference(value = "agreement-document")
+	private Set<Document> documents;
 
 	public ClientAgreement() {
 	}
@@ -101,12 +99,23 @@ public class ClientAgreement extends UrlBaseEntity implements Serializable {
 		return client.getAlias();
 	}
 
-	// public Set<Document> getDocuments() {
-	// return documents;
-	// }
-	//
-	// public void setDocuments(Set<Document> documents) {
-	// this.documents = documents;
-	// }
+	public Set<Document> getDocuments() {
+		return documents;
+	}
+
+	public void setDocuments(Set<Document> documents) {
+		this.documents = documents;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ClientAgreement [");
+		builder.append("client=" + client);
+		builder.append("number=" + number);
+		builder.append("dateStart=" + dateStart).append("]");
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

@@ -14,6 +14,5 @@ public abstract class BaseController {
 	static final String REQUEST_MAPPING_ADD = "/add/";
 	static final String REQUEST_MAPPING_UPDATE = "/update/{id}";
 	static final String REQUEST_MAPPING_DELETE = "/delete/{id}";
-	
 
 }
