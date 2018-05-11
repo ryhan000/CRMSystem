@@ -19,11 +19,11 @@ VALUES
   ( 3 , 3 , ' Ukraine, 00023, Kyiv, T. Shevchenko blvd., 18 ' , ' 2012-01-01 ' , 0 );
   
 TRUNCATE `client_director`;
-INSERT INTO `client_director` (`id`, `client_id`, `post`, `full_name`, `short_name`, `date_start`, `optlock`)
+INSERT INTO `client_director` (`id`, `client_id`, `post_id`, `full_name`, `short_name`, `date_start`, `optlock`)
 VALUES
-	( 1 , 1 , ' General Director ' , ' Stepaniuk Alla Borisovna ' , ' Stepaniuk AB ' , ' 2013-01-01 ' , 0 ),
-	( 2 , 2 , ' CEO ' , ' Slyepakov Simon V. ' , ' Slyepakov SV ' , ' 1/1/2013 ' , 0 )
-	( 3 , 3 , ' General Director ' , ' Makhno Nestor Petrovich ' , ' Makhno NP ' , ' 2013-01-01 ' , 0 );
+	( 1 , 1 , 1 , ' Stepanyuk Alla Borisovna ' , ' Stepanyuk AB ' , ' 2013-01-01 ' , 0 ),
+	( 2 , 2 , 1 , ' Slyapakov Semyon Valerievich ' , ' Slackakov SV ' , ' 2013-01-01 ' , 0 ),
+	( 3 , 3 , 1 , ' Makhno Nestor Petrovich ' , ' Makhno NP ' , ' 2013-01-01 ' , 0 );
 	
 TRUNCATE `client_account`;
 INSERT INTO `client_account` (`id`, `client_id`, `presentation`, `date_start`, `optlock`)
