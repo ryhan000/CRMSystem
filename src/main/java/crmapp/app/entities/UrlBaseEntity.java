@@ -11,7 +11,12 @@ public class UrlBaseEntity extends BaseEntity {
 
 	@JsonIgnore
 	public String getUrl() {
-		return getClass().getSimpleName().toLowerCase() + ID_SEPARATOR + getId();
+		return getClass().getSimpleName().toLowerCase() + "s" + ID_SEPARATOR + getId();
+	}
+
+	@Override
+	public String toString() {
+		return "UrlBaseEntity [toString()=" + super.toString() + "]";
 	}
 
 }
