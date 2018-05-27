@@ -1,5 +1,6 @@
 package crmapp.app.entities;
 
+
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -7,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,16 +19,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 @Table(name = "document")
-@NamedQueries({
-	@NamedQuery(
-		name = Document.FIND_ALL_DOCUMENTS_BY_AGREEMENT_ID, 
-		query = "SELECT d FROM Document d WHERE d.agreement.id = :agreementId")
-})
 @JsonIgnoreProperties(ignoreUnknown = true,
 	value = { "hibernateLazyInitializer", "handler" })
-public class Document extends UrlBaseEntity {
-
-	public static final String FIND_ALL_DOCUMENTS_BY_AGREEMENT_ID = "Document.findAllDocumentsByAgreementId";
+public class Document extends BaseEntity {
 
 	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(name = "doc_type_id")
@@ -112,11 +104,6 @@ public class Document extends UrlBaseEntity {
 		this.comment = comment;
 	}
 
-	@JsonInclude
-	public Integer getAgreementId() {
-		return agreement.getId();
-	}
-
 	public String getNumber() {
 		return number;
 	}
@@ -139,6 +126,41 @@ public class Document extends UrlBaseEntity {
 
 	public void setAgreement(ClientAgreement agreement) {
 		this.agreement = agreement;
+	}
+	
+	@JsonInclude
+	public Integer getAgreementId() {
+		return agreement.getId();
+	}
+	
+	@JsonInclude
+	public String getAgreementNumber() {
+		return agreement.getNumber();
+	}
+	
+	@JsonInclude
+	public String getDocTypeShortTitle() {
+		return docType.getShortTitle();
+	}
+	
+	@JsonInclude
+	public String getDocStatus() {
+		return status.getStatus();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Document [");
+		builder.append(super.toString()).append(", ");
+		builder.append("docType=" + docType.getShortTitle()).append(", ");
+		builder.append("number=" + number).append(", ");
+		builder.append("amount=" + amount).append(", ");
+		builder.append("dated=" + dated).append(", ");
+		builder.append("paymentDate=" + paymentDate).append(", ");
+		builder.append("status=" + status.getStatus()).append(", ");
+		builder.append("agreement=" + agreement).append("]");
+		return builder.toString();
 	}
 
 }

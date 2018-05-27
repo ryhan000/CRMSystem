@@ -14,7 +14,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "client")
-@JsonIgnoreProperties(ignoreUnknown = true, value = { "hibernateLazyInitializer", "handler", "agreements", "addresses", "directors", "accounts" })
+@JsonIgnoreProperties(ignoreUnknown = true, 
+	value = { "hibernateLazyInitializer", "handler",
+			"agreements", "addresses", "directors", "accounts" })
 public class Client extends AbstractCompany {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client", orphanRemoval = true)
@@ -82,10 +84,13 @@ public class Client extends AbstractCompany {
 
 	@Override
 	public String toString() {
-		return new StringBuilder("Client [").append(super.toString()).append(", ")
-				.append("agreements=" + agreements.size()).append(", ").append("addresses=" + addresses.size())
-				.append(", ").append("directors=" + directors.size()).append(", ").append("accounts=" + accounts.size())
-				.append("]").toString();
+		return new StringBuilder("Client [")
+			.append(super.toString()).append(", ")
+			.append("agreements=" + agreements.size()).append(", ")
+			.append("addresses=" + addresses.size()).append(", ")
+			.append("directors=" + directors.size()).append(", ")
+			.append("accounts=" + accounts.size()).append("]")
+			.toString();
 	}
 
 }
