@@ -8,8 +8,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "document_status")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class DocumentStatus extends UrlBaseEntity {
+@JsonIgnoreProperties(ignoreUnknown = true, 
+	value = { "hibernateLazyInitializer", "handler" })
+public class DocumentStatus extends BaseEntity {
 
 	@Column(name = "status")
 	private String status;
@@ -27,6 +28,21 @@ public class DocumentStatus extends UrlBaseEntity {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	@Override
+	public String getUrl() {
+		return "document-statuses/" + this.getId();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("DocumentStatus [");
+		builder.append(super.toString()).append(", ");
+		builder.append("status=" + status).append(", ");
+		builder.append("url=" + this.getUrl()).append("]");
+		return builder.toString();
 	}
 
 }

@@ -1,6 +1,5 @@
 package crmapp.app.entities;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,35 +17,20 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "employee")
 @JsonIgnoreProperties(ignoreUnknown = true, 
-	value = { "hibernateLazyInitializer", "handler" })
-public class Employee extends UrlBaseEntity implements Serializable {
+	value = { "hibernateLazyInitializer", "handler",
+			"vacations", "sickLists", "addresses", "accounts" })
+public class Employee extends BaseEntity {
 
-	private static final long serialVersionUID = 1L;
-
-	@Column(name = "surname", length = 50)
-	private String surname;
-
-	@Column(name = "firstname", length = 50)
-	private String firstname;
-
-	@Column(name = "lastname", length = 50)
-	private String lastname;
-
-	@Column(name = "short_name", length = 20)
-	private String shortName;
-
-	@Column(name = "inn", length = 20)
-	private String inn;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "birth_date")
-	private Date birthDate;
-
+	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinColumn(name = "person_id")
+	private Person person;
+	
 	@Column(name = "is_entrepreneur", nullable = false)
 	private boolean isEntrepreneur = false;
 
@@ -85,66 +69,12 @@ public class Employee extends UrlBaseEntity implements Serializable {
 	public Employee() {
 	}
 
-	public Employee(String surname, String firstname, String lastname, String shortName, String inn, Date birthDate,
-			boolean isEntrepreneur, Date hireDate, Date firedDate, Post post) {
-		this.surname = surname;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.shortName = shortName;
-		this.inn = inn;
-		this.birthDate = birthDate;
-		this.isEntrepreneur = isEntrepreneur;
-		this.hireDate = hireDate;
-		this.firedDate = firedDate;
-		this.post = post;
+	public Person getPerson() {
+		return person;
 	}
 
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public String getFirstname() {
-		return firstname;
-	}
-
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
-	public String getLastname() {
-		return lastname;
-	}
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
-	public String getShortName() {
-		return shortName;
-	}
-
-	public void setShortName(String shortName) {
-		this.shortName = shortName;
-	}
-
-	public String getInn() {
-		return inn;
-	}
-
-	public void setInn(String inn) {
-		this.inn = inn;
-	}
-
-	public Date getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 
 	public boolean isEntrepreneur() {
@@ -209,6 +139,34 @@ public class Employee extends UrlBaseEntity implements Serializable {
 
 	public void setAccounts(Set<EmployeeAccount> accounts) {
 		this.accounts = accounts;
+	}
+	
+	@JsonInclude
+	public String getPersonShortName() {
+		return person.getShortName();
+	}
+	
+	@JsonInclude
+	public String getPersonInn() {
+		return person.getInn();
+	}
+	
+	@JsonInclude
+	public String getPostTitle() {
+		return post.getTitle();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Employee [");
+		builder.append(super.toString()).append(", ");
+		builder.append("person=" + person).append(", ");
+		builder.append("isEntrepreneur=" + isEntrepreneur).append(", ");
+		builder.append("hireDate=" + hireDate).append(", ");
+		builder.append("firedDate=" + firedDate).append(", ");
+		builder.append("post=" + post.getTitle()).append("]");
+		return builder.toString();
 	}
 
 }
