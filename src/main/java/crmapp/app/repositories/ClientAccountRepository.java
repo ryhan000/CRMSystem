@@ -14,3 +14,4 @@ public interface ClientAccountRepository extends JpaRepository<ClientAccount, In
 	public List<ClientAccount> findAllByClientId(@Param("clientId") Integer clientId);
 	
 }
+
