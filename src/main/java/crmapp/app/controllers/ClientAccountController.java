@@ -33,7 +33,7 @@ public class ClientAccountController extends BaseController {
 	@Autowired
 	private ClientAccountRepository accountRepository;
 	
-	@Autowired
+	@Autowired 
 	private ClientRepository clientRepository;
 
 	@GetMapping(value = "", headers = HEADER_JSON)
